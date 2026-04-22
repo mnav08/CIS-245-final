@@ -1,0 +1,45 @@
+.check-in-form {
+  max-width: 620px;
+  display: grid;
+  gap: 20px;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.check-in-form label {
+  display: grid;
+  gap: 8px;
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.check-in-form input,
+.check-in-form textarea {
+  width: 100%;
+}
+
+.check-in-form textarea {
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-field);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.check-in-form input[type="range"] {
+  accent-color: var(--color-primary);
+}
+
+.check-in-form textarea::placeholder {
+  color: var(--color-muted);
+}
+
+.form-message {
+  margin: 0;
+  color: var(--color-accent);
+  font-weight: 700;
+}

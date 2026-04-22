@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mood Map | Check-In</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/check-in.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main navigation">
+      <a class="logo" href="index.html" aria-label="Mood Map dashboard">
+        <img src="assets/images/logo-moodMap.png" alt="" class="logo-image" aria-hidden="true">
+        <span>Mood Map</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="check-in.html">Check-In</a></li>
+        <li><a href="history.html">History</a></li>
+        <li><a href="insights.html">Insights</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <h1>Daily Check-In</h1>
+      <p>Log today once. Keep it quick.</p>
+    </section>
+
+    <form id="check-in-form" class="check-in-form">
+      <label>
+        Mood
+        <input type="range" name="mood" min="1" max="10" value="5">
+      </label>
+      <label>
+        Sleep quality
+        <input type="range" name="sleep" min="1" max="10" value="5">
+      </label>
+      <label>
+        Hydration
+        <input type="range" name="hydration" min="1" max="10" value="5">
+      </label>
+      <label>
+        Energy
+        <input type="range" name="energy" min="1" max="10" value="5">
+      </label>
+      <label>
+        Optional note
+        <textarea name="note" rows="3" placeholder="A few words, only if useful"></textarea>
+      </label>
+      <button class="button" type="submit">Save check-in</button>
+      <p id="check-in-message" class="form-message" role="status"></p>
+    </form>
+  </main>
+
+  <script src="js/storage.js"></script>
+  <script src="js/entries.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
