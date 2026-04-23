@@ -30,22 +30,70 @@
     </section>
 
     <form id="check-in-form" class="check-in-form">
-      <label>
-        Mood
-        <input type="range" name="mood" min="1" max="10" value="5">
-      </label>
-      <label>
-        Sleep quality
-        <input type="range" name="sleep" min="1" max="10" value="5">
-      </label>
-      <label>
-        Hydration
-        <input type="range" name="hydration" min="1" max="10" value="5">
-      </label>
-      <label>
-        Energy
-        <input type="range" name="energy" min="1" max="10" value="5">
-      </label>
+      <fieldset class="rating-group">
+        <legend>Mood <span class="rating-hint">1 bad, 5 good</span></legend>
+        <div class="rating-options" aria-label="Mood rating from 1 bad to 5 good">
+          <input type="radio" id="mood-1" name="mood" value="1" required>
+          <label class="rating-button rating-1" for="mood-1">1</label>
+          <input type="radio" id="mood-2" name="mood" value="2">
+          <label class="rating-button rating-2" for="mood-2">2</label>
+          <input type="radio" id="mood-3" name="mood" value="3" checked>
+          <label class="rating-button rating-3" for="mood-3">3</label>
+          <input type="radio" id="mood-4" name="mood" value="4">
+          <label class="rating-button rating-4" for="mood-4">4</label>
+          <input type="radio" id="mood-5" name="mood" value="5">
+          <label class="rating-button rating-5" for="mood-5">5</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="rating-group">
+        <legend>Sleep quality <span class="rating-hint">1 bad, 5 good</span></legend>
+        <div class="rating-options" aria-label="Sleep quality rating from 1 bad to 5 good">
+          <input type="radio" id="sleep-1" name="sleep" value="1" required>
+          <label class="rating-button rating-1" for="sleep-1">1</label>
+          <input type="radio" id="sleep-2" name="sleep" value="2">
+          <label class="rating-button rating-2" for="sleep-2">2</label>
+          <input type="radio" id="sleep-3" name="sleep" value="3" checked>
+          <label class="rating-button rating-3" for="sleep-3">3</label>
+          <input type="radio" id="sleep-4" name="sleep" value="4">
+          <label class="rating-button rating-4" for="sleep-4">4</label>
+          <input type="radio" id="sleep-5" name="sleep" value="5">
+          <label class="rating-button rating-5" for="sleep-5">5</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="rating-group">
+        <legend>Hydration <span class="rating-hint">1 bad, 5 good</span></legend>
+        <div class="rating-options" aria-label="Hydration rating from 1 bad to 5 good">
+          <input type="radio" id="hydration-1" name="hydration" value="1" required>
+          <label class="rating-button rating-1" for="hydration-1">1</label>
+          <input type="radio" id="hydration-2" name="hydration" value="2">
+          <label class="rating-button rating-2" for="hydration-2">2</label>
+          <input type="radio" id="hydration-3" name="hydration" value="3" checked>
+          <label class="rating-button rating-3" for="hydration-3">3</label>
+          <input type="radio" id="hydration-4" name="hydration" value="4">
+          <label class="rating-button rating-4" for="hydration-4">4</label>
+          <input type="radio" id="hydration-5" name="hydration" value="5">
+          <label class="rating-button rating-5" for="hydration-5">5</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="rating-group">
+        <legend>Energy <span class="rating-hint">1 bad, 5 good</span></legend>
+        <div class="rating-options" aria-label="Energy rating from 1 bad to 5 good">
+          <input type="radio" id="energy-1" name="energy" value="1" required>
+          <label class="rating-button rating-1" for="energy-1">1</label>
+          <input type="radio" id="energy-2" name="energy" value="2">
+          <label class="rating-button rating-2" for="energy-2">2</label>
+          <input type="radio" id="energy-3" name="energy" value="3" checked>
+          <label class="rating-button rating-3" for="energy-3">3</label>
+          <input type="radio" id="energy-4" name="energy" value="4">
+          <label class="rating-button rating-4" for="energy-4">4</label>
+          <input type="radio" id="energy-5" name="energy" value="5">
+          <label class="rating-button rating-5" for="energy-5">5</label>
+        </div>
+      </fieldset>
+
       <label>
         Optional note
         <textarea name="note" rows="3" placeholder="A few words, only if useful"></textarea>

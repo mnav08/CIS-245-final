@@ -1,5 +1,5 @@
 const MoodMapStorage = {
-  key: "moodMapEntries",
+  key: "moodMapEntriesV2",
 
   getEntries() {
     const savedEntries = localStorage.getItem(this.key);

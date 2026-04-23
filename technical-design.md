@@ -66,6 +66,7 @@ The dashboard is the application landing page. It includes:
 - Heatmap preview
 - Current streak count
 - Quick average mood stat
+- 30-day data simulation button for previewing saved entries
 
 The dashboard loads `storage.js`, `entries.js`, `heatmap.js`, `insights.js`, and `app.js`.
 
@@ -75,13 +76,13 @@ File: `check-in.html`
 
 The check-in page contains the primary entry form. It captures:
 
-- Mood, 1-10
-- Sleep quality, 1-10
-- Hydration, 1-10
-- Energy, 1-10
+- Mood, 1-5
+- Sleep quality, 1-5
+- Hydration, 1-5
+- Energy, 1-5
 - Optional note
 
-Submitting the form creates or replaces the entry for the current date. This enforces the MVP rule that only one entry should exist per day.
+Submitting the form creates an entry for the current date only if one does not already exist. This enforces the MVP rule that only one check-in can be submitted per day.
 
 ### History
 
@@ -136,7 +137,9 @@ Responsible for entry-level operations.
 
 - `getTodayDate()` returns the current date as `YYYY-MM-DD`.
 - `getAll()` returns all entries sorted newest first.
-- `save(entry)` updates the existing entry for that date or inserts a new one.
+- `hasEntryForDate(date)` checks whether a date already has an entry.
+- `save(entry)` inserts a new entry and returns `false` if that date already exists.
+- `replaceAll(entries)` replaces the full stored entry list, used by simulation data generation.
 - `delete(date)` removes an entry by date.
 
 ### `MoodMapHeatmap`
@@ -192,10 +195,10 @@ Entries are stored as an array under the `localStorage` key `moodMapEntries`.
 [
   {
     "date": "2026-04-15",
-    "mood": 7,
-    "sleep": 8,
-    "hydration": 6,
-    "energy": 7,
+    "mood": 4,
+    "sleep": 4,
+    "hydration": 3,
+    "energy": 4,
     "note": "Sample entry for future testing."
   }
 ]
@@ -206,13 +209,13 @@ Entries are stored as an array under the `localStorage` key `moodMapEntries`.
 | Field       | Type                     | Description                                   |
 | ----------- | ------------------------ | --------------------------------------------- |
 | `date`      | string                   | ISO-like calendar date in `YYYY-MM-DD` format |
-| `mood`      | number or numeric string | User mood rating from 1 to 10                 |
-| `sleep`     | number or numeric string | Sleep quality rating from 1 to 10             |
-| `hydration` | number or numeric string | Hydration rating from 1 to 10                 |
-| `energy`    | number or numeric string | Energy rating from 1 to 10                    |
+| `mood`      | number or numeric string | User mood rating from 1 to 5                  |
+| `sleep`     | number or numeric string | Sleep quality rating from 1 to 5              |
+| `hydration` | number or numeric string | Hydration rating from 1 to 5                  |
+| `energy`    | number or numeric string | Energy rating from 1 to 5                     |
 | `note`      | string                   | Optional free-text note                       |
 
-Form submissions currently store range values as strings because `FormData.get()` returns strings. Calculation modules convert values with `Number()` when needed.
+Form submissions currently store radio button values as strings because `FormData.get()` returns strings. Calculation modules convert values with `Number()` when needed.
 
 ## Styling Architecture
 
@@ -232,7 +235,7 @@ Contains:
 ### Page Styles
 
 - `css/dashboard.css`: dashboard card grid and heatmap grid
-- `css/check-in.css`: check-in form layout and inputs
+- `css/check-in.css`: check-in form layout and 1-5 rating buttons
 - `css/history.css`: history entry card layout
 - `css/insights.css`: insights panel and progress bar
 
@@ -248,20 +251,23 @@ Current accessibility support includes:
 - `aria-live` regions for history and insights updates
 - Visible keyboard focus styles for links, buttons, inputs, and textareas
 - Status message area for check-in save confirmation
+- Native radio inputs behind the rating buttons so keyboard users can tab and select values
 
-Future improvements should include visible range values, clearer heatmap labels, and confirmation affordances for destructive delete actions.
+Future improvements should include clearer heatmap labels and confirmation affordances for destructive delete actions.
 
 ## Key User Flows
 
 ### Save Daily Check-In
 
 1. User opens `check-in.html`.
-2. User adjusts range inputs and optionally writes a note.
+2. User selects 1-5 rating buttons and optionally writes a note.
 3. Form submit is intercepted in `setupCheckInForm()`.
 4. An entry is created with today's date.
-5. `MoodMapEntries.save()` updates or inserts the entry.
+5. `MoodMapEntries.save()` inserts the entry only when today's date is unused.
 6. Updated entries are persisted to `localStorage`.
-7. A success message is shown.
+7. A success message is shown and the submit button is disabled.
+
+If today's entry already exists, the submit button is disabled and the user sees a status message explaining that today's check-in is complete.
 
 ### View Dashboard
 
@@ -270,6 +276,15 @@ Future improvements should include visible range values, clearer heatmap labels,
 3. Heatmap preview renders the latest 28 entry slots.
 4. Streak count is calculated from consecutive dates ending today.
 5. Average mood is displayed when entries exist.
+
+### Generate Simulation Data
+
+1. User opens `index.html`.
+2. User clicks `Generate 30 days`.
+3. The app generates one sample entry for each of the last 30 dates.
+4. Existing entries outside that date range are preserved.
+5. The generated range replaces entries with matching dates to maintain one entry per day.
+6. The page reloads so dashboard, history, and insights read the saved data.
 
 ### View and Delete History
 
@@ -299,7 +314,7 @@ Future improvements should include visible range values, clearer heatmap labels,
 
 - Data is limited to the user's current browser and device.
 - Clearing browser data removes all entries.
-- There is no validation beyond range input constraints.
+- There is no validation beyond required 1-5 rating selections.
 - There is no server sync, authentication, account system, or backup.
 - The app relies on global script load order.
 - History supports deletion but not editing.
@@ -310,7 +325,6 @@ Future improvements should include visible range values, clearer heatmap labels,
 
 - Add edit support for history entries.
 - Add delete confirmation or undo.
-- Display live numeric values beside range sliders.
 - Normalize saved numeric fields to numbers at write time.
 - Render a calendar-accurate heatmap with date-aware empty cells.
 - Add hydration to the insights summary.
@@ -324,7 +338,8 @@ Future improvements should include visible range values, clearer heatmap labels,
 The current project does not include an automated test framework. Manual testing should cover:
 
 - Saving today's check-in
-- Re-saving today and confirming the entry is replaced
+- Re-saving today and confirming a second submission is blocked
+- Generating 30 days of simulated data from the dashboard
 - Viewing dashboard heatmap, streak, and quick stats
 - Viewing history entries
 - Deleting an entry

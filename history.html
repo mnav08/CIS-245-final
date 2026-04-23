@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mood Map | History</title>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/dashboard.css">
   <link rel="stylesheet" href="css/history.css">
 </head>
 <body>
@@ -30,11 +31,17 @@
       <button id="export-csv" class="button" type="button">Export CSV</button>
     </section>
 
+    <section class="history-heatmap-section" aria-labelledby="history-heatmap-title">
+      <h2 id="history-heatmap-title">Heatmap</h2>
+      <div id="history-heatmap" class="heatmap history-heatmap" aria-label="Mood heatmap"></div>
+    </section>
+
     <section id="entries-list" class="entries-list" aria-live="polite"></section>
   </main>
 
   <script src="js/storage.js"></script>
   <script src="js/entries.js"></script>
+  <script src="js/heatmap.js"></script>
   <script src="js/export.js"></script>
   <script src="js/app.js"></script>
 </body>

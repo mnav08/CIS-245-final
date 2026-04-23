@@ -1,10 +1,10 @@
 [
   {
     "date": "2026-04-15",
-    "mood": 7,
-    "sleep": 8,
-    "hydration": 6,
-    "energy": 7,
+    "mood": 4,
+    "sleep": 4,
+    "hydration": 3,
+    "energy": 4,
     "note": "Sample entry for future testing."
   }
 ]

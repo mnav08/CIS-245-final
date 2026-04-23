@@ -7,6 +7,33 @@
   box-shadow: var(--shadow-soft);
 }
 
+.insights-panel h2 {
+  margin-top: 0;
+  color: var(--color-accent);
+}
+
+.insights-panel p {
+  color: var(--color-muted);
+  font-size: 1.05rem;
+}
+
+.insight-label,
+.insight-highlight {
+  font-weight: 800;
+}
+
+.mood-text {
+  color: #fb7185;
+}
+
+.sleep-text {
+  color: #93c5fd;
+}
+
+.energy-text {
+  color: #bef264;
+}
+
 .progress-track {
   height: 12px;
   overflow: hidden;

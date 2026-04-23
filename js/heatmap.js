@@ -1,5 +1,13 @@
 const MoodMapHeatmap = {
-  render(containerId, entries) {
+  moodColors: {
+    1: "#ef4444",
+    2: "#f97316",
+    3: "#f6c56f",
+    4: "#84cc16",
+    5: "#31d5c6"
+  },
+
+  render(containerId, entries, options = {}) {
     const container = document.getElementById(containerId);
 
     if (!container) {
@@ -8,15 +16,31 @@ const MoodMapHeatmap = {
 
     container.innerHTML = "";
 
-    // MVP preview: render the latest 28 days as simple mood intensity squares.
-    for (let index = 0; index < 28; index += 1) {
+    const limit = options.limit || 30;
+    const showEmptyCells = options.showEmptyCells !== false;
+    const sortedEntries = [...entries].sort((a, b) => a.date.localeCompare(b.date));
+    const visibleEntries = sortedEntries.slice(Math.max(sortedEntries.length - limit, 0));
+    const cellCount = showEmptyCells ? Math.max(limit, visibleEntries.length) : visibleEntries.length;
+    const emptyCells = Math.max(cellCount - visibleEntries.length, 0);
+
+    for (let index = 0; index < cellCount; index += 1) {
       const cell = document.createElement("span");
-      const entry = entries[index];
+      const entry = visibleEntries[index - emptyCells];
       const mood = entry ? Number(entry.mood) : 0;
-      const opacity = mood ? 0.25 + mood / 14 : 0.18;
+      const color = this.moodColors[mood] || "var(--color-surface-raised)";
 
       cell.className = "heatmap-cell";
-      cell.style.backgroundColor = `rgba(49, 213, 198, ${opacity})`;
+      cell.style.backgroundColor = color;
+
+      if (entry) {
+        cell.title = `${entry.date} - mood ${mood}/5`;
+        cell.setAttribute("aria-label", `${entry.date}, mood ${mood} out of 5`);
+      } else {
+        cell.classList.add("heatmap-cell-empty");
+        cell.title = "No entry";
+        cell.setAttribute("aria-label", "No mood entry");
+      }
+
       container.appendChild(cell);
     }
   }

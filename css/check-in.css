@@ -9,16 +9,94 @@
   box-shadow: var(--shadow-soft);
 }
 
-.check-in-form label {
+.check-in-form label,
+.rating-group legend {
   display: grid;
   gap: 8px;
   color: var(--color-text);
   font-weight: 700;
 }
 
-.check-in-form input,
 .check-in-form textarea {
   width: 100%;
+}
+
+.rating-group {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.rating-group legend {
+  margin-bottom: 8px;
+  padding: 0;
+}
+
+.rating-hint {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.rating-options {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(44px, 1fr));
+  gap: 10px;
+}
+
+.rating-options input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.rating-button {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  color: #071018;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.rating-button:hover {
+  filter: brightness(1.08);
+}
+
+.rating-1 {
+  background: #f97066;
+}
+
+.rating-2 {
+  background: #f59e0b;
+}
+
+.rating-3 {
+  background: #f6c56f;
+}
+
+.rating-4 {
+  background: #8bd46e;
+}
+
+.rating-5 {
+  background: #31d583;
+}
+
+.rating-options input:checked + .rating-button {
+  border-color: var(--color-text);
+  box-shadow: 0 0 0 3px rgba(246, 197, 111, 0.36);
+}
+
+.rating-options input:focus-visible + .rating-button {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 .check-in-form textarea {
@@ -30,8 +108,9 @@
   font: inherit;
 }
 
-.check-in-form input[type="range"] {
-  accent-color: var(--color-primary);
+.check-in-form button:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
 }
 
 .check-in-form textarea::placeholder {
