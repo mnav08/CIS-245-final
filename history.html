@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="css/history.css">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <nav class="navbar" aria-label="Main navigation">
       <a class="logo" href="index.html" aria-label="Mood Map dashboard">
@@ -18,13 +19,13 @@
       <ul class="nav-links">
         <li><a href="index.html">Dashboard</a></li>
         <li><a href="check-in.html">Check-In</a></li>
-        <li><a href="history.html">History</a></li>
+        <li><a href="history.html" aria-current="page">History</a></li>
         <li><a href="insights.html">Insights</a></li>
       </ul>
     </nav>
   </header>
 
-  <main>
+  <main id="main-content">
     <section class="page-header">
       <h1>History</h1>
       <p>Review, edit, delete, or export your entries.</p>
@@ -33,10 +34,13 @@
 
     <section class="history-heatmap-section" aria-labelledby="history-heatmap-title">
       <h2 id="history-heatmap-title">Heatmap</h2>
-      <div id="history-heatmap" class="heatmap history-heatmap" aria-label="Mood heatmap"></div>
+      <div id="history-heatmap" class="heatmap history-heatmap" aria-label="Mood heatmap of saved entries"></div>
     </section>
 
-    <section id="entries-list" class="entries-list" aria-live="polite"></section>
+    <section aria-labelledby="entries-title">
+      <h2 id="entries-title" class="visually-hidden">Saved entries</h2>
+      <div id="entries-list" class="entries-list" aria-live="polite" aria-atomic="true"></div>
+    </section>
   </main>
 
   <script src="js/storage.js"></script>

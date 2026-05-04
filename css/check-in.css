@@ -122,3 +122,18 @@
   color: var(--color-accent);
   font-weight: 700;
 }
+
+@media (max-width: 560px) {
+  .check-in-form {
+    padding: 18px;
+    gap: 18px;
+  }
+
+  .rating-options {
+    gap: 8px;
+  }
+
+  .rating-button {
+    min-height: 52px;
+  }
+}

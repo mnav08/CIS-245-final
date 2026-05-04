@@ -46,3 +46,13 @@
   border-radius: inherit;
   background: var(--color-primary);
 }
+
+@media (max-width: 560px) {
+  .insights-panel {
+    padding: 18px;
+  }
+
+  .insights-panel p {
+    font-size: 1rem;
+  }
+}

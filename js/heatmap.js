@@ -33,7 +33,9 @@ const MoodMapHeatmap = {
       cell.style.backgroundColor = color;
 
       if (entry) {
-        cell.title = `${entry.date} - mood ${mood}/5`;
+        cell.dataset.tooltip = entry.date;
+        cell.title = entry.date;
+        cell.tabIndex = 0;
         cell.setAttribute("aria-label", `${entry.date}, mood ${mood} out of 5`);
       } else {
         cell.classList.add("heatmap-cell-empty");

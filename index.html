@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <nav class="navbar" aria-label="Main navigation">
       <a class="logo" href="index.html" aria-label="Mood Map dashboard">
@@ -15,7 +16,7 @@
         <span>Mood Map</span>
       </a>
       <ul class="nav-links">
-        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="index.html" aria-current="page">Dashboard</a></li>
         <li><a href="check-in.html">Check-In</a></li>
         <li><a href="history.html">History</a></li>
         <li><a href="insights.html">Insights</a></li>
@@ -23,7 +24,7 @@
     </nav>
   </header>
 
-  <main>
+  <main id="main-content">
     <section class="hero">
       <h1>Track emotional patterns without turning it into homework.</h1>
       <p>A quick daily check-in becomes a visual map of your mood, energy, sleep, and habits over time.</p>
@@ -46,7 +47,7 @@
         </article>
         <article class="card">
           <h3>Heatmap</h3>
-          <div id="dashboard-heatmap" class="heatmap" aria-label="Mood heatmap preview"></div>
+          <div id="dashboard-heatmap" class="heatmap" aria-label="Mood heatmap preview of recent entries"></div>
         </article>
         <article class="card">
           <h3>Streak</h3>

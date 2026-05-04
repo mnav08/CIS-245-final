@@ -139,9 +139,9 @@ function renderDashboard(entries) {
     }
 
     quickStats.innerHTML = `
-      <span><strong>Average mood</strong> ${MoodMapInsights.getAverage(entries, "mood")}/5</span>
+      <span><strong>Average mood</strong> ${MoodMapInsights.getAverage(entries, "mood")} out of 5</span>
       <span><strong>Streak</strong> ${MoodMapInsights.getStreak(entries)} days</span>
-      <span><strong>Avg energy</strong> ${MoodMapInsights.getAverage(entries, "energy")}/5</span>
+      <span><strong>Average energy</strong> ${MoodMapInsights.getAverage(entries, "energy")} out of 5</span>
     `;
   }
 }
@@ -168,16 +168,16 @@ function renderHistory(entries) {
 
   list.innerHTML = entries.map((entry) => `
     <article class="entry-card">
-      <h2>${escapeHtml(entry.date)}</h2>
+      <h3>${escapeHtml(entry.date)}</h3>
       <div class="entry-metrics">
-        <span class="entry-metric mood-text">Mood: ${escapeHtml(entry.mood)}/5</span>
-        <span class="entry-metric sleep-text">Sleep: ${escapeHtml(entry.sleep)}/5</span>
-        <span class="entry-metric hydration-text">Hydration: ${escapeHtml(entry.hydration)}/5</span>
-        <span class="entry-metric energy-text">Energy: ${escapeHtml(entry.energy)}/5</span>
+        <span class="entry-metric mood-text">Mood: ${escapeHtml(entry.mood)} out of 5</span>
+        <span class="entry-metric sleep-text">Sleep: ${escapeHtml(entry.sleep)} out of 5</span>
+        <span class="entry-metric hydration-text">Hydration: ${escapeHtml(entry.hydration)} out of 5</span>
+        <span class="entry-metric energy-text">Energy: ${escapeHtml(entry.energy)} out of 5</span>
       </div>
       <p class="entry-note">${escapeHtml(entry.note || "No note added.")}</p>
       <div class="entry-actions">
-        <button class="button" type="button" data-delete-date="${escapeHtml(entry.date)}">Delete</button>
+        <button class="button" type="button" data-delete-date="${escapeHtml(entry.date)}" aria-label="Delete entry for ${escapeHtml(entry.date)}">Delete entry</button>
       </div>
     </article>
   `).join("");
@@ -207,7 +207,7 @@ function renderInsights(entries) {
       <h2>Insights locked</h2>
       <p>You need at least <span class="insight-highlight mood-text">7 mood entries</span> to unlock insights.</p>
       <p>You have <span class="insight-highlight energy-text">${entries.length}</span> so far. <span class="insight-highlight sleep-text">${remaining}</span> to go.</p>
-      <div class="progress-track" aria-label="Insight unlock progress">
+      <div class="progress-track" role="progressbar" aria-label="Insight unlock progress" aria-valuemin="0" aria-valuemax="${MoodMapInsights.requiredEntries}" aria-valuenow="${entries.length}" aria-valuetext="${entries.length} of ${MoodMapInsights.requiredEntries} entries saved">
         <div class="progress-fill" style="width: ${progress}%"></div>
       </div>
     `;

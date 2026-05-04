@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/check-in.css">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <nav class="navbar" aria-label="Main navigation">
       <a class="logo" href="index.html" aria-label="Mood Map dashboard">
@@ -16,32 +17,33 @@
       </a>
       <ul class="nav-links">
         <li><a href="index.html">Dashboard</a></li>
-        <li><a href="check-in.html">Check-In</a></li>
+        <li><a href="check-in.html" aria-current="page">Check-In</a></li>
         <li><a href="history.html">History</a></li>
         <li><a href="insights.html">Insights</a></li>
       </ul>
     </nav>
   </header>
 
-  <main>
+  <main id="main-content">
     <section class="page-header">
       <h1>Daily Check-In</h1>
       <p>Log today once. Keep it quick.</p>
     </section>
 
-    <form id="check-in-form" class="check-in-form">
+    <form id="check-in-form" class="check-in-form" aria-describedby="check-in-description">
+      <p id="check-in-description" class="visually-hidden">Choose a rating from 1 to 5 for each category, then optionally add a note.</p>
       <fieldset class="rating-group">
         <legend>Mood <span class="rating-hint">1 bad, 5 good</span></legend>
         <div class="rating-options" aria-label="Mood rating from 1 bad to 5 good">
-          <input type="radio" id="mood-1" name="mood" value="1" required>
+          <input type="radio" id="mood-1" name="mood" value="1" aria-label="Mood 1 out of 5" required>
           <label class="rating-button rating-1" for="mood-1">1</label>
-          <input type="radio" id="mood-2" name="mood" value="2">
+          <input type="radio" id="mood-2" name="mood" value="2" aria-label="Mood 2 out of 5">
           <label class="rating-button rating-2" for="mood-2">2</label>
-          <input type="radio" id="mood-3" name="mood" value="3" checked>
+          <input type="radio" id="mood-3" name="mood" value="3" aria-label="Mood 3 out of 5" checked>
           <label class="rating-button rating-3" for="mood-3">3</label>
-          <input type="radio" id="mood-4" name="mood" value="4">
+          <input type="radio" id="mood-4" name="mood" value="4" aria-label="Mood 4 out of 5">
           <label class="rating-button rating-4" for="mood-4">4</label>
-          <input type="radio" id="mood-5" name="mood" value="5">
+          <input type="radio" id="mood-5" name="mood" value="5" aria-label="Mood 5 out of 5">
           <label class="rating-button rating-5" for="mood-5">5</label>
         </div>
       </fieldset>
@@ -49,15 +51,15 @@
       <fieldset class="rating-group">
         <legend>Sleep quality <span class="rating-hint">1 bad, 5 good</span></legend>
         <div class="rating-options" aria-label="Sleep quality rating from 1 bad to 5 good">
-          <input type="radio" id="sleep-1" name="sleep" value="1" required>
+          <input type="radio" id="sleep-1" name="sleep" value="1" aria-label="Sleep quality 1 out of 5" required>
           <label class="rating-button rating-1" for="sleep-1">1</label>
-          <input type="radio" id="sleep-2" name="sleep" value="2">
+          <input type="radio" id="sleep-2" name="sleep" value="2" aria-label="Sleep quality 2 out of 5">
           <label class="rating-button rating-2" for="sleep-2">2</label>
-          <input type="radio" id="sleep-3" name="sleep" value="3" checked>
+          <input type="radio" id="sleep-3" name="sleep" value="3" aria-label="Sleep quality 3 out of 5" checked>
           <label class="rating-button rating-3" for="sleep-3">3</label>
-          <input type="radio" id="sleep-4" name="sleep" value="4">
+          <input type="radio" id="sleep-4" name="sleep" value="4" aria-label="Sleep quality 4 out of 5">
           <label class="rating-button rating-4" for="sleep-4">4</label>
-          <input type="radio" id="sleep-5" name="sleep" value="5">
+          <input type="radio" id="sleep-5" name="sleep" value="5" aria-label="Sleep quality 5 out of 5">
           <label class="rating-button rating-5" for="sleep-5">5</label>
         </div>
       </fieldset>
@@ -65,15 +67,15 @@
       <fieldset class="rating-group">
         <legend>Hydration <span class="rating-hint">1 bad, 5 good</span></legend>
         <div class="rating-options" aria-label="Hydration rating from 1 bad to 5 good">
-          <input type="radio" id="hydration-1" name="hydration" value="1" required>
+          <input type="radio" id="hydration-1" name="hydration" value="1" aria-label="Hydration 1 out of 5" required>
           <label class="rating-button rating-1" for="hydration-1">1</label>
-          <input type="radio" id="hydration-2" name="hydration" value="2">
+          <input type="radio" id="hydration-2" name="hydration" value="2" aria-label="Hydration 2 out of 5">
           <label class="rating-button rating-2" for="hydration-2">2</label>
-          <input type="radio" id="hydration-3" name="hydration" value="3" checked>
+          <input type="radio" id="hydration-3" name="hydration" value="3" aria-label="Hydration 3 out of 5" checked>
           <label class="rating-button rating-3" for="hydration-3">3</label>
-          <input type="radio" id="hydration-4" name="hydration" value="4">
+          <input type="radio" id="hydration-4" name="hydration" value="4" aria-label="Hydration 4 out of 5">
           <label class="rating-button rating-4" for="hydration-4">4</label>
-          <input type="radio" id="hydration-5" name="hydration" value="5">
+          <input type="radio" id="hydration-5" name="hydration" value="5" aria-label="Hydration 5 out of 5">
           <label class="rating-button rating-5" for="hydration-5">5</label>
         </div>
       </fieldset>
@@ -81,25 +83,25 @@
       <fieldset class="rating-group">
         <legend>Energy <span class="rating-hint">1 bad, 5 good</span></legend>
         <div class="rating-options" aria-label="Energy rating from 1 bad to 5 good">
-          <input type="radio" id="energy-1" name="energy" value="1" required>
+          <input type="radio" id="energy-1" name="energy" value="1" aria-label="Energy 1 out of 5" required>
           <label class="rating-button rating-1" for="energy-1">1</label>
-          <input type="radio" id="energy-2" name="energy" value="2">
+          <input type="radio" id="energy-2" name="energy" value="2" aria-label="Energy 2 out of 5">
           <label class="rating-button rating-2" for="energy-2">2</label>
-          <input type="radio" id="energy-3" name="energy" value="3" checked>
+          <input type="radio" id="energy-3" name="energy" value="3" aria-label="Energy 3 out of 5" checked>
           <label class="rating-button rating-3" for="energy-3">3</label>
-          <input type="radio" id="energy-4" name="energy" value="4">
+          <input type="radio" id="energy-4" name="energy" value="4" aria-label="Energy 4 out of 5">
           <label class="rating-button rating-4" for="energy-4">4</label>
-          <input type="radio" id="energy-5" name="energy" value="5">
+          <input type="radio" id="energy-5" name="energy" value="5" aria-label="Energy 5 out of 5">
           <label class="rating-button rating-5" for="energy-5">5</label>
         </div>
       </fieldset>
 
-      <label>
+      <label for="note">
         Optional note
-        <textarea name="note" rows="3" placeholder="A few words, only if useful"></textarea>
+        <textarea id="note" name="note" rows="3" placeholder="A few words, only if useful"></textarea>
       </label>
       <button class="button" type="submit">Save check-in</button>
-      <p id="check-in-message" class="form-message" role="status"></p>
+      <p id="check-in-message" class="form-message" role="status" aria-live="polite" aria-atomic="true"></p>
     </form>
   </main>
 

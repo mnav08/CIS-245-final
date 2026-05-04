@@ -37,6 +37,12 @@
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
 }
 
+.heatmap-cell:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(246, 197, 111, 0.3);
+}
+
 .heatmap-cell-empty {
   opacity: 0.35;
 }
@@ -62,6 +68,10 @@
 }
 
 @media (max-width: 560px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
   .heatmap {
     grid-template-columns: repeat(7, minmax(0, 1fr));
   }

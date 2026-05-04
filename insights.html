@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/insights.css">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <nav class="navbar" aria-label="Main navigation">
       <a class="logo" href="index.html" aria-label="Mood Map dashboard">
@@ -18,18 +19,18 @@
         <li><a href="index.html">Dashboard</a></li>
         <li><a href="check-in.html">Check-In</a></li>
         <li><a href="history.html">History</a></li>
-        <li><a href="insights.html">Insights</a></li>
+        <li><a href="insights.html" aria-current="page">Insights</a></li>
       </ul>
     </nav>
   </header>
 
-  <main>
+  <main id="main-content">
     <section class="page-header">
       <h1>Insights</h1>
       <p>Patterns unlock after 7 entries.</p>
     </section>
 
-    <section id="insights-panel" class="insights-panel" aria-live="polite"></section>
+    <section id="insights-panel" class="insights-panel" aria-live="polite" aria-atomic="true"></section>
   </main>
 
   <script src="js/storage.js"></script>
