@@ -1,0 +1,12 @@
+{
+  "name": "moodmap",
+  "private": true,
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "jsdom": "latest",
+    "vitest": "latest"
+  }
+}
