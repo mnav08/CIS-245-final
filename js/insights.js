@@ -15,7 +15,7 @@ const MoodMapInsights = {
     let streak = 0;
     const currentDate = new Date();
 
-    while (dates.has(currentDate.toISOString().slice(0, 10))) {
+    while (dates.has(MoodMapEntries.formatDate(currentDate))) {
       streak += 1;
       currentDate.setDate(currentDate.getDate() - 1);
     }

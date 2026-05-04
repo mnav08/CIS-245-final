@@ -3,7 +3,18 @@ const MoodMapStorage = {
 
   getEntries() {
     const savedEntries = localStorage.getItem(this.key);
-    return savedEntries ? JSON.parse(savedEntries) : [];
+
+    if (!savedEntries) {
+      return [];
+    }
+
+    try {
+      const parsedEntries = JSON.parse(savedEntries);
+      return Array.isArray(parsedEntries) ? parsedEntries : [];
+    } catch (error) {
+      localStorage.removeItem(this.key);
+      return [];
+    }
   },
 
   saveEntries(entries) {

@@ -1,14 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const entries = MoodMapEntries.getAll();
-
   markActiveNavigation();
   setupCheckInForm();
   setupSimulationButton();
+  setupHistoryActions();
+  setupExport();
+  refreshUI();
+});
+
+function refreshUI() {
+  const entries = MoodMapEntries.getAll();
+
   renderDashboard(entries);
   renderHistory(entries);
   renderInsights(entries);
-  setupExport(entries);
-});
+}
 
 function markActiveNavigation() {
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
@@ -26,19 +31,17 @@ function setupCheckInForm() {
     return;
   }
 
-  const today = MoodMapEntries.getTodayDate();
   const message = document.getElementById("check-in-message");
+  const submitButton = form.querySelector("button[type='submit']");
 
-  if (MoodMapEntries.hasEntryForDate(today)) {
-    form.querySelector("button[type='submit']").disabled = true;
-    message.textContent = "You already completed today's check-in.";
-  }
+  syncCheckInState(form, message, submitButton);
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
+    const entries = MoodMapEntries.getAll();
     const todayDate = MoodMapEntries.getTodayDate();
 
-    if (MoodMapEntries.hasEntryForDate(todayDate)) {
+    if (MoodMapEntries.hasEntryForDate(todayDate, entries)) {
       message.textContent = "You already completed today's check-in.";
       return;
     }
@@ -53,13 +56,24 @@ function setupCheckInForm() {
       note: formData.get("note").trim()
     };
 
-    const wasSaved = MoodMapEntries.save(entry);
+    const wasSaved = MoodMapEntries.saveWithEntries(entry, entries);
 
     if (wasSaved) {
-      form.querySelector("button[type='submit']").disabled = true;
       message.textContent = "Today's check-in is saved.";
+      syncCheckInState(form, message, submitButton);
     }
   });
+}
+
+function syncCheckInState(form, message, submitButton) {
+  const today = MoodMapEntries.getTodayDate();
+  const hasEntry = MoodMapEntries.hasEntryForDate(today);
+
+  submitButton.disabled = hasEntry;
+
+  if (hasEntry) {
+    message.textContent = "You already completed today's check-in.";
+  }
 }
 
 function setupSimulationButton() {
@@ -79,9 +93,7 @@ function setupSimulationButton() {
       simulationMessage.textContent = "30 days of sample entries were saved.";
     }
 
-    window.setTimeout(() => {
-      window.location.reload();
-    }, 500);
+    refreshUI();
   });
 }
 
@@ -100,7 +112,7 @@ function createSimulatedEntries(days) {
     date.setDate(date.getDate() - index);
 
     entries.push({
-      date: date.toISOString().slice(0, 10),
+      date: MoodMapEntries.formatDate(date),
       mood: getSimulatedRating(index, 1),
       sleep: getSimulatedRating(index, 2),
       hydration: getSimulatedRating(index, 3),
@@ -181,13 +193,21 @@ function renderHistory(entries) {
       </div>
     </article>
   `).join("");
+}
+
+function setupHistoryActions() {
+  const list = document.getElementById("entries-list");
+
+  if (!list) {
+    return;
+  }
 
   list.addEventListener("click", (event) => {
     const deleteDate = event.target.dataset.deleteDate;
 
     if (deleteDate) {
       MoodMapEntries.delete(deleteDate);
-      window.location.reload();
+      refreshUI();
     }
   });
 }
@@ -222,7 +242,7 @@ function renderInsights(entries) {
   `;
 }
 
-function setupExport(entries) {
+function setupExport() {
   const exportButton = document.getElementById("export-csv");
 
   if (!exportButton || typeof MoodMapExport === "undefined") {
@@ -230,6 +250,7 @@ function setupExport(entries) {
   }
 
   exportButton.addEventListener("click", () => {
+    const entries = MoodMapEntries.getAll();
     MoodMapExport.downloadCsv(entries);
   });
 }

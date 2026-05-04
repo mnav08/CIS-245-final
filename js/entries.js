@@ -1,18 +1,30 @@
 const MoodMapEntries = {
+  formatDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  },
+
   getTodayDate() {
-    return new Date().toISOString().slice(0, 10);
+    return this.formatDate(new Date());
   },
 
   getAll() {
     return MoodMapStorage.getEntries().sort((a, b) => b.date.localeCompare(a.date));
   },
 
-  hasEntryForDate(date) {
-    return MoodMapStorage.getEntries().some((entry) => entry.date === date);
+  hasEntryForDate(date, entries = MoodMapStorage.getEntries()) {
+    return entries.some((entry) => entry.date === date);
   },
 
   save(entry) {
     const entries = MoodMapStorage.getEntries();
+    return this.saveWithEntries(entry, entries);
+  },
+
+  saveWithEntries(entry, entries) {
     const existingIndex = entries.findIndex((item) => item.date === entry.date);
 
     if (existingIndex >= 0) {
