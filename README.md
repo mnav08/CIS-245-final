@@ -93,11 +93,9 @@ Each entry follows this shape:
 npm install
 ```
 
-### 2. Run the app
+### 2. Live demo
 
-This project is a static front-end app, so you can open `index.html` directly in a browser.
-
-If you prefer a local server, you can use any static server you already have installed.
+[https://mnav08.github.io/CIS-245-final/]
 
 ### 3. Run tests
 
